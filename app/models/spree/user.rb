@@ -12,6 +12,7 @@ module Spree
     after_destroy :scramble_email_and_password
 
     before_validation :set_login
+    has_and_belongs_to_many :stores
 
     users_table_name = User.table_name
     roles_table_name = Role.table_name
