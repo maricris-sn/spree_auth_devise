@@ -24,6 +24,8 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up
         sign_up(resource_name, resource)
+        resource.stores << Spree::Store.find(params[:active_store_id])
+        resource.save
         session[:spree_user_signup] = true
         respond_with resource, location: after_sign_up_path_for(resource)
       else
